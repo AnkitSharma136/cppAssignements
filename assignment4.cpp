@@ -26,17 +26,18 @@ public:
         n = other.n;
     }
 
-    // myArray(myArray &other){
-    //     cout<<"Deep copy constructor called"<<endl;
-    //     refPtr = new refCount;
-    //     refPtr->arr = new int[other.n];
+    myArray(myArray &other , int x){
+        cout<<"Deep copy constructor called"<<endl;
+        refPtr = new refCount;
+        refPtr->arr = new int[other.n];
 
-    //     for(int i=0;i<n;i++){
-    //         refPtr->arr[i] = other.refPtr->arr[i];
-    //     }
+        for(int i=0;i<other.n;i++){
+            refPtr->arr[i] = other.refPtr->arr[i];
+        }
 
-    //     refPtr->count=1;
-    // }
+        refPtr->count=1;
+        n = other.n;
+    }
 
     myArray& operator=(const myArray &other){
         refPtr->count--;
@@ -99,10 +100,16 @@ int main(){
     arr.fillArray();
     //arr[1]=8;
     myArray arr2 = arr;
+    myArray arr3(arr2,1);
+
     arr.display();
     arr2.display();
-    //cout<<&arr.refPtr<<endl;
-    //cout<<&arr2.refPtr<<endl;
-    //cout<<&arr.refPtr->arr<<endl;
-    //cout<<&arr.refPtr->arr<<endl;
+    arr3.display();
+
+    cout<<&arr.refPtr<<endl;
+    cout<<&arr2.refPtr<<endl;
+    cout<<&arr3.refPtr<<endl;
+    cout<<&arr.refPtr->arr<<endl;
+    cout<<&arr2.refPtr->arr<<endl;
+    cout<<&arr3.refPtr->arr<<endl;
 }
