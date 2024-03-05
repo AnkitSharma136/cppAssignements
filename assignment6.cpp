@@ -19,7 +19,7 @@ public:
         refPtr->count = 1;
     }
 
-    myArray (myArray &other){
+    myArray (const myArray &other){
         cout<<"Shallow Copy Constructor Called"<<endl;
         refPtr = other.refPtr;
         other.refPtr->count++;
@@ -40,6 +40,9 @@ public:
     }
 
     myArray& operator=(const myArray &other){
+
+        if(&other == this) return *this;
+
         refPtr->count--;
         if(refPtr->count<=0){
             delete []refPtr->arr;
@@ -141,6 +144,8 @@ int main(){
     myArray arr2 = ++arr;
 
     arr2.display();
+
+    myArray arr5 = arr;
     
     myArray arr3(arr.n);
 
@@ -148,9 +153,9 @@ int main(){
 
     arr3.display();
 
-    myArray arr4(arr.n);
+   // myArray arr4(arr.n);
 
-    arr4 = arr3 - arr;
+    myArray arr4 = arr3 - arr;
 
     arr4.display();
 }

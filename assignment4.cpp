@@ -40,6 +40,9 @@ public:
     }
 
     myArray& operator=(const myArray &other){
+
+        if(&other == this) return *this;
+        
         refPtr->count--;
         if(refPtr->count<=0){
             delete []refPtr->arr;
